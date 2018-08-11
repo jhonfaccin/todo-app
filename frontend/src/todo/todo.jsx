@@ -14,6 +14,8 @@ export default class Todo extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleAdd = this.handleAdd.bind(this)
         this.handleRemove = this.handleRemove.bind(this)
+        this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
+        this.handleMarkAsPeding = this.handleMarkAsPeding.bind(this)
         this.refresh()
     }
 
@@ -36,13 +38,26 @@ export default class Todo extends Component {
         this.setState({ ...this.state, description: evento.target.value })
     }
 
+    handleMarkAsDone(todo) {
+        axios.put(`${URL}/${todo._id}`, { ...todo, done: true }).then(this.refresh());
+    }
+
+    handleMarkAsPeding(todo){
+        axios.put(`${URL}/${todo._id}`,{...todo,done: false}).then(this.refresh());
+    }
+
     render() {
         return (
             <div>
                 <PageHeader name='Tarefas' small='Cadastro'></PageHeader>
-                <TodoForm handleAdd={this.handleAdd} description={this.description}
+                <TodoForm
+                    handleAdd={this.handleAdd}
+                    description={this.description}
                     handleChange={this.handleChange}></TodoForm>
-                <TodoList list={this.state.list} handleRemove={this.handleRemove}>
+                <TodoList list={this.state.list}
+                    handleRemove={this.handleRemove}
+                    handleMarkAsDone={this.handleMarkAsDone}
+                    handleMarkAsPeding={this.handleMarkAsPeding}>
                 </TodoList>
             </div>
         )
