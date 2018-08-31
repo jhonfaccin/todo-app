@@ -1,0 +1,10 @@
+.addContacts{
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.addContacts > input{
+    margin-right: 5px;
+    width: 40%;
+}
+

@@ -9,4 +9,8 @@ module.exports = function(server){
     //TODO router
     const todoService = require('../api/todo/todoService')
     todoService.register(router,'/todos')
+
+    //PHONEBOOK router
+    const phonebookService = require('../api/phonebook/phonebookService')
+    phonebookService.register(router,'/phonebook')
 }
